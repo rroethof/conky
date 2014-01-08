@@ -1,0 +1,115 @@
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_hints undecorated,below,skip_taskbar
+own_window_type override
+own_window_colour brown
+own_window_transparent yes
+
+background no
+maximum_width 200
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# fiddle with window
+use_spacer right
+
+# Update interval in seconds
+update_interval 1
+
+# Minimum size of text area
+minimum_size 350 5
+
+# Draw shades?
+draw_shades yes
+
+
+draw_borders no
+# Stippled borders?
+# stippled_borders 8
+# window.border_inner_margin 4
+border_width 2
+
+
+# Default colors and also border colors, grey90 == #e5e5e5
+default_color white
+default_shade_color black
+default_outline_color white
+
+
+
+# Text alignment, other possible values are commented
+#alignment top_left
+alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+
+# Gap between borders of screen and text
+gap_x 10
+gap_y 30
+
+# Text stuff
+draw_outline no # amplifies text if yes
+uppercase no # set to yes if you want all text to be in uppercase
+override_utf8_locale no
+use_xft yes
+xftfont Terminus:size=9
+#xftfont Sans:size=8
+xftalpha 0.8
+
+text_buffer_size 768
+
+########## BEGIN FORMATTED DISPLAY ##########
+TEXT
+${font :size=15}${color red}${alignc}${execi 6000 hostname}${font}${color }
+${font :size=8}${alignc}${color lightgrey}$kernel${font}${color }
+${hr 1}
+${color grey}Uptime:$color${alignr}$uptime
+${color grey}Frequency (in MHz):${alignr}$color $freq
+${color grey}Frequency (in GHz):${alignr}$color $freq_g
+$hr
+${color grey}UpTime: ${alignr}${color lightgrey}$uptime${color }
+
+${font StyleBats:size=17}${font Terminus:size=12}CPU ${font}${hr 2}
+${color grey}CPU:${color } ${cpu cpu1}% ${cpu cpu2}% ${alignr}${color }$loadavg
+${alignc}${cpugraph cpu1 20,90 000000 ffffff} ${cpugraph cpu2 20,90 000000 ffffff}
+${color grey}Processes: ${color }${alignr}$processes  
+${color grey}Running:   ${color }${alignr}$running_processes
+
+${color grey}Top CPU:
+${color #ddaa00} ${top name 1}${alignr}${top_mem cpu 1}
+${color lightgrey} ${top name 2}${alignr}${top cpu 2}
+${color lightgrey} ${top name 3}${alignr}${top cpu 3}
+${color lightgrey} ${top name 4}${alignr}${top cpu 4}${color }
+
+${font StyleBats:size=17}${font Terminus:size=12}MEMORY ${font}${hr 2}
+${color grey}RAM: ${alignr}${membar 5,100}
+${color grey}SWAP: ${alignr}${swapbar 5,100}${color }
+
+${color grey}Top Memory:
+${color #ddaa00} ${top_mem name 1}${alignr}${top_mem mem 1}
+${color lightgrey} ${top_mem name 2}${alignr}${top_mem mem 2}
+${color lightgrey} ${top_mem name 3}${alignr}${top_mem mem 3}
+${color lightgrey} ${top_mem name 4}${alignr}${top_mem mem 4}${color }
+
+${font StyleBats:size=17}${font Terminus:size=12}DISKS ${font}${hr 2}
+${color grey}ROOT: ${alignr}${fs_bar 5,100 /}
+${color grey}HOME: ${alignr}${fs_bar 5,100 /home}
+${color grey}VAR: ${alignr}${fs_bar 5,100 /var}
+${color grey}TMP: ${alignr}${fs_bar 5,100 /tmp}
+${color grey}TV: ${alignr}${fs_bar 5,100 /nas/tv}
+${color grey}MOVIES: ${alignr}${fs_bar 5,100 /nas/movies}
+${color grey}MP3: ${alignr}${fs_bar 5,100 /nas/mp3}${color }
+
+${font StyleBats:size=17}${font Terminus:size=12}NETWORK ${font}${hr 2}
+${color grey}Local IP: ${alignr}${color }${addr eth0}
+${color grey}Public IP: ${alignr}${color }${execi 450 ~/.scripts/externip.sh}
+
+${color}Up: ${color }${upspeed eth0} k/s
+${alignc}${upspeedgraph eth0 20,170 000000 ffffff}
+${color}Down: ${color }${downspeed eth0}k/s${color}
+${alignc}${downspeedgraph eth0 20,170 000000 ffffff}
+
+${color #dddddd}
+${font Sans:size=12}${time %A, %d %B %Y}${font Sans:size=8}
+${font FFF Tusj:size=50}${alignr}${time %H:%M}${font Sans:size=10}
