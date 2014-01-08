@@ -71,8 +71,9 @@ $hr
 ${color grey}UpTime: ${alignr}${color lightgrey}$uptime${color }
 
 ${font StyleBats:size=17}${font Terminus:size=12}CPU ${font}${hr 2}
-${color grey}CPU:${color } ${cpu cpu1}% ${cpu cpu2}% ${alignr}${color }$loadavg
-${alignc}${cpugraph cpu1 20,90 000000 ffffff} ${cpugraph cpu2 20,90 000000 ffffff}
+${color grey}CPU:${color } ${alignr}${cpu cpu1}% ${cpu cpu2}% ${cpu cpu3}% ${cpu cpu4}%
+${color grey}LOAD:${color } ${alignr}${color }$loadavg
+${alignc}${cpugraph cpu1 20,40 000000 ffffff} ${cpugraph cpu2 20,40 000000 ffffff} ${cpugraph cpu3 20,40 000000 ffffff} ${cpugraph cpu4 20,40 000000 ffffff}
 ${color grey}Processes: ${color }${alignr}$processes  
 ${color grey}Running:   ${color }${alignr}$running_processes
 
